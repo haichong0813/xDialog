@@ -1,0 +1,209 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>xDialog</title>
+		<link rel="stylesheet" href="xDialog.css">
+		<style type="text/css">
+			body,div,p,h1,h3,h4,ul{margin:0;padding:0}
+			body{background:#403d35;color:#403d35;font-family: 微软雅黑,arial,sans-serif;font-size:16px }
+			#wrap{margin: 0 auto;width: 1000px;background:#FFF;}
+			.p20{padding:20px}
+			.h{background:#fff4d6;text-align:center;padding: 5px 0;margin-bottom: 20px;}
+			.tr{text-align:right}
+			#wrap .header{margin-bottom: 20px;}
+			#wrap .desc{padding: 5px;opacity: 0.6;}
+			pre{border-radius: 3px;border:1px solid #CCC;background:#F5F5F5;font-family:verdana}
+			.tb{border-collapse: collapse;border: 1px solid #CCCCCC;width:100%}
+			.tb td{border: 1px solid #CCC;}
+		</style>	
+	</head>
+	<body>
+		<div id="wrap">
+			<div class="p20">
+				<div class="header">
+					<h1>X - Dialog 轻量级弹出层</h1>
+					<div class="desc">—— xDialog是一个JQuery弹出层插件，它拥有简单的界面和友好的接口，压缩后大小仅2K左右。</div>
+				</div>
+				<div class="main">
+					<h3 class="h">示例演示</h3>
+					<h4>1、简单调用</h4>
+<pre class="x1">	
+	$.xDialog({
+		title:'温馨提示',
+		content:'xDialog是一个JQuery弹出层插件，它拥有简单的界面和友好的接口。'
+	});
+
+</pre>
+					<p class="tr"><input type="button" id='x1' class="g-button green" value="运行"></p>
+					<h4>2、传入HTMLElement</h4>
+<pre class="x2">	
+	$.xDialog({
+		title:'温馨提示',
+		content:document.getElementById('el') //支持JQuery对象，$('#el')
+	});
+
+</pre>
+					<p class="tr"><input type="button" id='x2' class="g-button green" value="运行"></p>
+					<h4>3、设置高度宽度</h4>
+<pre class="x3">	
+	$.xDialog({
+		title:'温馨提示',
+		content:'xDialog是一个JQuery弹出层插件，它拥有简单的界面和友好的接口。',
+		width:300,
+		height:200
+	});
+
+</pre>
+					<p class="tr"><input type="button" id='x3' class="g-button green" value="运行"></p>
+					<h4>4、确定取消按钮</h4>
+<pre class="x4">	
+	$.xDialog({
+		title:'温馨提示',
+		content:'xDialog是一个JQuery弹出层插件，它拥有简单的界面和友好的接口。',
+		ok:function(){
+			alert('ok');
+		},
+		cancel:function(){
+			alert('cancel');
+		}
+	});
+
+</pre>
+					<p class="tr"><input type="button" id="x4" class="g-button green" value="运行"></p>
+					<h4>5、提示层</h4>
+<pre class="x5">	
+	$.xDialog({
+		content:'xDialog是一个JQuery弹出层插件，它拥有简单的界面和友好的接口。',
+		type:'tips',
+		time:3
+	});
+
+</pre>
+					<p class="tr"><input type="button" id='x5' class="g-button green" value="运行"></p>
+					<h4>6、扩展方法</h4>
+<pre class="x6">	
+	var art = $.xDialog({
+		show:false
+	});
+	art.title('温馨提示').content('小巧，灵活，简洁，高效').open();
+
+</pre>
+					<p class="tr"><input type="button" id='x6' class="g-button green" value="运行"></p>
+					<br>
+					<h3 class="h">参数列表</h3>
+					<table border=1 cellpadding=5 cellspacing=0 class="tb">
+						<tr style="background:#403D35;color:#FFF">
+							<td>名称</td><td>类型</td><td width="10%">默认值</td><td>描述</td>
+						</tr>
+						<tr>
+							<td>title</td><td>String</td><td> </td><td>标题内容</td>
+						</tr>
+						<tr>
+							<td>content</td><td>String/HTMLElement</td><td> </td><td>如果传入的是HTMLElement类型，隐藏元素会自动显示。</td>
+						</tr>
+						<tr>
+							<td>width</td><td>Number</td><td>auto</td><td>设置消息内容宽度。一般不用设置，自适应。</td>
+						</tr>
+						<tr>
+							<td>height</td><td>Number</td><td>auto</td><td>设置消息内容高度，一般不用设置，自适应。</td>
+						</tr>
+						<tr>
+							<td>opacity</td><td>Number</td><td>0.7</td><td>锁屏遮罩透明度，false为不显示遮罩</td>
+						</tr>
+						<tr>
+							<td>show</td><td>Boolean</td><td>true</td><td>是否显示弹出层</td>
+						</tr>
+						<tr>
+							<td>overlayClose</td><td>Boolean</td><td>true</td><td>点击遮罩层是否可以关闭</td>
+						</tr>
+						<tr>
+							<td>ok</td><td>function</td><td>null</td><td>确定按钮回调函数，函数如果返回false将阻止弹出层关闭</td>
+						</tr>
+						<tr>
+							<td>cancel</td><td>function/Boolean</td><td>true</td><td>取消按钮回调函数，如果为true，调用默认关闭事件，函数如果返回false将阻止弹出层关闭</td>
+						</tr>
+						<tr>
+							<td>type</td><td>String</td><td>null</td><td>消息类型：tips</td>
+						</tr>
+						<tr>
+							<td>time</td><td>Number</td><td>true</td><td>多少秒后关闭弹出层</td>
+						</tr>
+					</table>
+					<br>
+					<h3 class="h">扩展方法</h3>
+					<table border=1 cellpadding=5 cellspacing=0 class="tb">
+						<tr style="background:#403D35;color:#FFF">
+							<td width="20%">名称</td><td>描述</td>
+						</tr>
+						<tr>
+							<td>open()</td><td>打开弹出层</td>
+						</tr>
+						<tr>
+							<td>close()</td><td>关闭弹出层</td>
+						</tr>
+						<tr>
+							<td>setTitle(string)</td><td>设置标题</td>
+						</tr>
+						<tr>
+							<td>setContent(string)</td><td>设置内容</td>
+						</tr>
+					</table>
+				</div>
+				<div id="el" style="display:none">
+					Hello World！
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="xDialog.min.js" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			$('#x1').click(function(){
+				$.xDialog({
+					title:'温馨提示', 
+					content:'xDialog是一个JQuery弹出层插件，它拥有简单的界面和友好的接口。'
+				});
+			});
+			$('#x2').click(function(){
+				$.xDialog({
+					title:'温馨提示', 
+					content:document.getElementById('el'),
+					opacity:false
+				});
+			});
+			$('#x3').click(function(){
+				$.xDialog({
+					title:'温馨提示', 
+					content:'xDialog是一个JQuery弹出层插件，它拥有简单的界面和友好的接口。',
+					width:300,
+					height:200
+				});
+			});
+			$('#x4').click(function(){
+				$.xDialog({
+					title:'温馨提示', 
+					content:'xDialog是一个JQuery弹出层插件，它拥有简单的界面和友好的接口。',
+					ok:function(){
+						alert("ok");
+					},
+					cancel:function(){
+						alert("cancel");
+					}
+				});
+			});
+			$('#x5').click(function(){
+				$.xDialog({
+					content:'xDialog是一个JQuery弹出层插件，它拥有简单的界面和友好的接口。',
+					type:'tips'
+				});
+			});
+			$('#x6').click(function(){
+				var art = $.xDialog({
+					show:false
+				});
+				art.setTitle('温馨提示').setContent('小巧，灵活，简洁，高效').open();
+			});
+		</script>
+	</body>
+</html>
