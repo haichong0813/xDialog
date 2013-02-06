@@ -16,6 +16,7 @@
 			pre{border-radius: 3px;border:1px solid #CCC;background:#F5F5F5;font-family:verdana}
 			.tb{border-collapse: collapse;border: 1px solid #CCCCCC;width:100%}
 			.tb td{border: 1px solid #CCC;}
+			a{text-decoration: none;}
 		</style>	
 	</head>
 	<body>
@@ -23,7 +24,7 @@
 			<div class="p20">
 				<div class="header">
 					<h1>X - Dialog 轻量级弹出层</h1>
-					<div class="desc">—— xDialog是一个JQuery弹出层插件，它拥有简单的界面和友好的接口，压缩后大小仅2K左右。</div>
+					<div class="desc">—— xDialog是一个JQuery弹出层插件，它拥有简单的界面和友好的接口，压缩后大小仅2K左右。<a href="https://github.com/haichong0813/xDialog" target="_blank">github</a></div>
 				</div>
 				<div class="main">
 					<h3 class="h">示例演示</h3>
@@ -116,6 +117,9 @@
 						</tr>
 						<tr>
 							<td>overlayClose</td><td>Boolean</td><td>true</td><td>点击遮罩层是否可以关闭</td>
+						</tr>
+						<tr>
+							<td>overlayColor</td><td>String</td><td>#FFF</td><td>遮罩层颜色</td>
 						</tr>
 						<tr>
 							<td>ok</td><td>function</td><td>null</td><td>确定按钮回调函数，函数如果返回false将阻止弹出层关闭</td>

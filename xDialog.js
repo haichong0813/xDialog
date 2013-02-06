@@ -1,8 +1,8 @@
 /**
 * @xDialog 弹出层
-* @author 赵海龙
+* @author zhaohailong
 * @version 3.0
-* @update 2013-2-4
+* @update 2013-2-6
 */
 
 ;(function($){
@@ -10,18 +10,20 @@
 
         //默认参数
         var defaults = {
-            width:'auto',       //宽度
-            height:'auto',      //高度
-            title:"",           //标题
-            content:"",         //内容
-            opacity:0.7,        //遮罩层透明度
-            show:true,          //是否立即显示弹出层
-            ok:null,            //确定按钮回调函数，函数如果返回false将阻止弹出层关闭
-            cancel:true,        //取消按钮回调函数，如果为true，调用默认关闭事件，函数如果返回false将阻止弹出层关闭
-            overlayClose:true,  //点击遮罩层是否可以关闭
-            type:null,          //消息类型：tips，配合time参数使用
-            time:1.5,           //多少秒后关闭弹出层，配合type参数使用
-            closeBtn:true       //是否显示右上角关闭按钮
+            width:'auto',            //宽度
+            height:'auto',           //高度
+            title:"",                //标题
+            content:"",              //内容
+            opacity:0.7,             //遮罩层透明度
+            show:true,               //是否立即显示弹出层
+            ok:null,                 //确定按钮回调函数，函数如果返回false将阻止弹出层关闭
+            cancel:true,             //取消按钮回调函数，如果为true，调用默认关闭事件，函数如果返回false将阻止弹出层关闭
+            overlayClose:true,       //点击遮罩层是否可以关闭
+            overlayColor:'#FFFFFF',  //遮罩层颜色
+            type:null,               //消息类型：tips，配合time参数使用
+            time:1.5,                //多少秒后关闭弹出层，配合type参数使用
+            closeBtn:true            //是否显示右上角关闭按钮
+
         };
 
         var plugin = this,//避免this混乱
@@ -48,16 +50,23 @@
                 $('<div>',{'class':'x-content clearfix'}).appendTo(this.dialog);
                 this.settings.opacity = false;
             }else{
-                this.header = $('<div>',{'class':'x-header clearfix'}).appendTo(this.dialog);
+                this.header = $('<div>',{'class':'x-header clearfix'});
 
-                //加入标题
-                $('<span>',{'class':'x-title'}).html(this.settings.title).appendTo(this.header);
+                //加入头部
+                if(this.settings.title || this.settings.closeBtn){
+                    this.header.appendTo(this.dialog);
 
-                //加入右上角关闭按钮
-                if(this.settings.closeBtn){
-                    $('<span>',{'class':'x-close'}).html('X').appendTo(this.header);
+                    //加入标题
+                    if(this.settings.title){
+                        $('<span>',{'class':'x-title'}).html(this.settings.title).appendTo(this.header);
+                    }
+                   
+                    //加入右上角关闭按钮
+                    if(this.settings.closeBtn){
+                        $('<span>',{'class':'x-close'}).html('X').appendTo(this.header);
+                    }
                 }
-
+               
                 //加入内容
                 $('<div>',{'class':'x-content'}).appendTo(this.dialog);
                 
@@ -77,7 +86,7 @@
                     plugin.overlay = jQuery('<div>', {
                         'class':'x-overlay'
                     }).css({
-                        'background-color': '#FFFFFF',
+                        'background-color': plugin.settings.overlayColor,
                         'position': 'absolute',
                         'width':    view.width,
                         'height':   view.height,
@@ -132,7 +141,13 @@
 
         //设置标题
         plugin.setTitle = function(title){
-            plugin.dialog.find('.x-title').html(title);
+            var _title = plugin.dialog.find('.x-title');
+            //判断标题节点是否存在
+            if(_title.length > 0){
+                 _title.html(title);
+            }else{
+                $('<span>',{'class':'x-title'}).html(title).appendTo(plugin.header);
+            }
             return this;
         };
 
@@ -187,20 +202,6 @@
             }
             return {width:this.width,height:this.height};
         };
-
         return plugin.init();
     };
-
-    // $.fn.xDialog = function(options) {
-    //     return this.each(function() {
-    //         if (undefined == $(this).data('xDialog')) {
-    //             console.log(1111111111111);
-    //             var plugin = new $.xDialog(this, options);
-    //             $(this).data('xDialog', plugin);
-    //         }else{
-    //             console.log(2222222222222);
-    //             $.xDialog(this, options);
-    //         }
-    //     });
-    // }
 })(jQuery);
