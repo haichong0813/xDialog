@@ -1,11 +1,12 @@
 /**
-* @xDialog 弹出层
-* @author zhaohailong
-* @version 3.0
-* @update 2013-2-6
-*/
+ * @name: xDialog
+ * @overview: xDialog是一个JQuery弹出层插件，它拥有简单的界面和友好的接口，压缩后大小仅2K左右。
+ * @require: xDialog.css
+ * @author: 简(haichong0813@gmail.com)
+ */
 
 ;(function($){
+    var isExist = true; //防止重复弹窗
     $.xDialog = function(){
 
         //默认参数
@@ -23,7 +24,6 @@
             type:null,               //消息类型：tips，配合time参数使用
             time:1.5,                //多少秒后关闭弹出层，配合type参数使用
             closeBtn:true            //是否显示右上角关闭按钮
-
         };
 
         var plugin = this,//避免this混乱
@@ -34,6 +34,12 @@
 
         //初始化
         plugin.init = function(){
+            //判断弹窗是否存在
+            if(!isExist){
+                return;
+            }
+            isExist = false;
+
             plugin.settings  = $.extend({},defaults,options);//合并参数
             plugin.create();
             return this;
@@ -172,6 +178,7 @@
             if(this.settings.type === 'tips' && this.settings.time){
                 setTimeout(function(){
                     plugin.close();
+                    isExist = true;
                 },this.settings.time * 1000);
             }
         };
@@ -180,6 +187,7 @@
         plugin.close = function(){
             plugin.dialog.remove();
             if(this.overlay) this.overlay.hide();
+            isExist = true;
         };
 
         //私有方法：获取文档大小
